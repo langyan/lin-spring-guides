@@ -1,6 +1,7 @@
 target/*
 .idea
-.settings/
+.settings/*
+upload-dir/*
 .project
 .classpath
 *.bak

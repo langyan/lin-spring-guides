@@ -1,0 +1,83 @@
+
+== 浏览器上传文件数据格式
+
+ ------WebKitFormBoundarycfumvCL8rYXiWvFz
+ Content-Disposition: form-data; name="file"; filename="1.htm"
+ Content-Type: text/html
+
+
+ ------WebKitFormBoundarycfumvCL8rYXiWvFz--
+
+==在Servlet3.0中使用request.getParts()获取上传文件
+----
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,    IOException { 
+      Collection<Part> parts = request.getParts();
+      for (Part part : parts) {
+         String headerValue = part.getHeader(HttpHeaders.CONTENT_DISPOSITION);
+				ContentDisposition disposition = ContentDisposition.parse(headerValue);//spring ContentDisposition
+				String filename = disposition.getFilename();
+				if (filename != null) {
+					if (filename.startsWith("=?") && filename.endsWith("?=")) {
+						filename = MimeDelegate.decode(filename);//spring MimeDelegate
+					}
+				}
+				InputStream inputStream=part.getInputStream();
+				  Files.copy(inputStream, "home/"+filename,
+                    StandardCopyOption.REPLACE_EXISTING);
+			}
+      
+      }
+   
+   }
+----
+ 
+
+== Spring StandardMultipartHttpServletRequest类获取分析信息
+----
+ private void parseRequest(HttpServletRequest request) {
+		try {
+			Collection<Part> parts = request.getParts();
+			this.multipartParameterNames = new LinkedHashSet<>(parts.size());
+			MultiValueMap<String, MultipartFile> files = new      LinkedMultiValueMap<>(parts.size());
+			for (Part part : parts) {
+				String headerValue = part.getHeader(HttpHeaders.CONTENT_DISPOSITION);
+				ContentDisposition disposition = ContentDisposition.parse(headerValue);
+				String filename = disposition.getFilename();
+				if (filename != null) {
+					if (filename.startsWith("=?") && filename.endsWith("?=")) {
+						filename = MimeDelegate.decode(filename);
+					}
+					files.add(part.getName(), new StandardMultipartFile(part, filename));
+				}
+				else {
+					this.multipartParameterNames.add(part.getName());
+				}
+			}
+			setMultipartFiles(files);
+		}
+		catch (Throwable ex) {
+			handleParseFailure(ex);
+		}
+	}
+----
+ 
+ 打包文件lin-spring-gs-rest-service-0.1.0.jar的目录结构
+----
+ BOOT-INF
+  classes  项目代码lin-spring-gs-rest-service
+  lib      项目依赖jar
+ META-INF
+  MANIFEST.MF
+ org       spring boot loader工程文件
+----
+  MANIFEST.MF文件
+----
+      Spring-Boot-Version: 2.0.2.RELEASE
+      Main-Class: org.springframework.boot.loader.JarLauncher
+      Start-Class: com.lin.spring.gs.rest.RestApplication
+      Spring-Boot-Classes: BOOT-INF/classes/
+      Spring-Boot-Lib: BOOT-INF/lib/
+----
+
+== 运行
+ java -jar target\lin-spring-gs-rest-service-0.1.0.jar
