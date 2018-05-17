@@ -32,7 +32,7 @@
 ----
  
 
-== Spring StandardMultipartHttpServletRequest类获取分析信息
+== Spring StandardMultipartHttpServletRequest类获取文件信息
 ----
  private void parseRequest(HttpServletRequest request) {
 		try {
@@ -63,5 +63,6 @@
  
 == 文件大小 tomcat serlvet3.0 限制文件大小(LimitedInputStream)
 每个文件的配置最大为1Mb，单次请求的文件的总数不能大于10Mb
+spring 1.4之后设置
 spring.http.multipart.maxFileSize=100Mb
 spring.http.multipart.maxRequestSize=1000Mb
