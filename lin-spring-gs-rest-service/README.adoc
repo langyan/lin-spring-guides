@@ -4,6 +4,25 @@
 
 == 打包
  mvn clean package
+ 
+ 打包文件lin-spring-gs-rest-service-0.1.0.jar的目录结构
+ ----
+ BOOT-INF
+  classes  项目代码lin-spring-gs-rest-service
+  lib      项目依赖jar
+ META-INF
+  MANIFEST.MF
+      
+ org       spring boot loader工程文件
+ ----
+  MANIFEST.MF文件
+  ----
+      Spring-Boot-Version: 2.0.2.RELEASE
+      Main-Class: org.springframework.boot.loader.JarLauncher
+      Start-Class: com.lin.spring.gs.rest.RestApplication
+      Spring-Boot-Classes: BOOT-INF/classes/
+      Spring-Boot-Lib: BOOT-INF/lib/
+  ----
 
 == 运行
  java -jar target\lin-spring-gs-rest-service-0.1.0.jar
