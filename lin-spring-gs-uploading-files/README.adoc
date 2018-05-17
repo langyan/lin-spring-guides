@@ -61,23 +61,7 @@
 	}
 ----
  
- 打包文件lin-spring-gs-rest-service-0.1.0.jar的目录结构
-----
- BOOT-INF
-  classes  项目代码lin-spring-gs-rest-service
-  lib      项目依赖jar
- META-INF
-  MANIFEST.MF
- org       spring boot loader工程文件
-----
-  MANIFEST.MF文件
-----
-      Spring-Boot-Version: 2.0.2.RELEASE
-      Main-Class: org.springframework.boot.loader.JarLauncher
-      Start-Class: com.lin.spring.gs.rest.RestApplication
-      Spring-Boot-Classes: BOOT-INF/classes/
-      Spring-Boot-Lib: BOOT-INF/lib/
-----
-
-== 运行
- java -jar target\lin-spring-gs-rest-service-0.1.0.jar
+== 文件大小 tomcat serlvet3.0 限制文件大小(LimitedInputStream)
+每个文件的配置最大为1Mb，单次请求的文件的总数不能大于10Mb
+spring.http.multipart.maxFileSize=100Mb
+spring.http.multipart.maxRequestSize=1000Mb
