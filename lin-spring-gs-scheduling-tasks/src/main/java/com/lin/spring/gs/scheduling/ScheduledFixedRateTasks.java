@@ -1,6 +1,7 @@
 package com.lin.spring.gs.scheduling;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import org.slf4j.Logger;
@@ -18,6 +19,10 @@ public class ScheduledFixedRateTasks {
 	public void reportCurrentTime() {
 		log.info("fixedRate = 5000,The time is now {}", dateFormat.format(new Date()));
 	}
+	@Scheduled(fixedDelay = 3000)
+    public void scheduled3() throws InterruptedException {
+        log.info("scheduled3 上次执行完毕后隔3秒继续执行：{}", LocalDateTime.now());
+    }
 
 	
 }
