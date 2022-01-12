@@ -5,3 +5,4 @@ upload-dir/*
 .project
 .classpath
 *.bak
+/target/
