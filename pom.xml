@@ -1,41 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
 
+    <groupId>com.lin.spring.gs</groupId>
+    <artifactId>lin-spring-gs-parent</artifactId>
+    <version>0.1.0</version>
+    <packaging>pom</packaging>
+    <modules>
 
+        <module>lin-spring-gs-jdbc</module>
+        <module>lin-spring-gs-messaging-rabbitmq</module>
+        <module>lin-spring-gs-rest-service</module>
+        <module>lin-spring-gs-scheduling-tasks</module>
+        <module>lin-spring-gs-securing-web</module>
+        <module>lin-spring-gs-uploading-files</module>
+        <module>lin-spring-gs-validation</module>
+        <module>lin-spring-gs-aop</module>
+    </modules>
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
 
-	<groupId>com.lin.spring.gs</groupId>
-	<artifactId>lin-spring-gs-parent</artifactId>
-	<version>0.1.0</version>
-	<packaging>pom</packaging>
-	<modules>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>2.7.5</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
-		<module>lin-spring-gs-jdbc</module>
-		<module>lin-spring-gs-messaging-rabbitmq</module>
-		<module>lin-spring-gs-rest-service</module>
-		<module>lin-spring-gs-scheduling-tasks</module>
-		<module>lin-spring-gs-securing-web</module>
-		<module>lin-spring-gs-uploading-files</module>
-		<module>lin-spring-gs-validation</module>
-	</modules>
-	<properties>
-		<java.version>1.8</java.version>
-	</properties>
-
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<!-- Import dependency management from Spring Boot -->
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-dependencies</artifactId>
-				<version>2.6.2</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 </project>

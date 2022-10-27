@@ -4,3 +4,4 @@ target/*
 .project
 .classpath
 *.bak
+/lin-spring-gs-aop/target/
